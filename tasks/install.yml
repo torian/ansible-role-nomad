@@ -1,0 +1,39 @@
+---
+
+- include: install/Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: install/RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+
+- name: Nomad package stat
+  stat:
+    path: "{{nomad_package_dest}}/{{nomad_package}}"
+  register: nomad_pkg_stat
+
+- name: Download Nomad Package
+  get_url:
+    url: "{{nomad_url}}"
+    dest: "{{nomad_package_dest}}"
+    mode: "0644"
+    validate_certs: "{{nomad_download_validate_certs}}"
+  when: not nomad_pkg_stat.stat.exists
+
+- name: Extract Nomad binary
+  unarchive:
+    copy: no
+    creates: "{{nomad_dest}}/nomad"
+    src: "{{nomad_package_dest}}/{{nomad_package}}"
+    dest: "{{nomad_dest}}"
+    owner: "{{nomad_user}}"
+    group: "{{nomad_group}}"
+    mode: "0750"
+
+- name: Symlink Nomad binary
+  file:
+    state: link
+    src: "{{nomad_dest}}/nomad"
+    dest: "{{nomad_bin}}"
+
+# vi:ts=2:sw=2:et:ft=yaml

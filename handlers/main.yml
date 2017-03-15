@@ -1,0 +1,18 @@
+---
+
+- name: nomad start
+  service:
+    name: nomad
+    state: started
+
+- name: nomad stop
+  service:
+    name: nomad
+    state: stopped
+
+- name: nomad restart
+  service:
+    name: filebeat
+    state: restarted
+
+# vi:ts=2:sw=2:et:ft=yaml

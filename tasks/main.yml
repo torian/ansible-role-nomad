@@ -1,0 +1,20 @@
+---
+
+- name: Include OS Family vars
+  include_vars: "{{ansible_os_family}}.yml"
+  tags: always
+
+- include: user.yml
+  when: nomad_create_user
+  tags: nomad_user
+
+- include: provision.yml
+  tags: nomad_provision
+
+- include: install.yml
+  tags: nomad_install
+
+- include: config.yml
+  tags: nomad_config
+
+# vi:ts=2:sw=2:et:ft=yaml

@@ -1,0 +1,59 @@
+---
+
+# Nomad user and group
+nomad_user:  nomad
+nomad_group: nomad
+
+# Create the nomad user and group
+nomad_create_user: true
+
+nomad_version: 0.5.5
+
+nomad_bin: /usr/local/bin/nomad
+nomad_dest: "/opt/nomad/{{nomad_version}}"
+
+# OS packages required
+#  NOTE: If packages become more complex than this,
+#  move things to vars/{{ansible_os_family}}.yml
+nomad_packages:
+  - zip
+  - unzip
+
+# get_url validate_certs
+# In case you are running on an old python version
+# you might want to toggle this to false if you get
+# an error like 'Failed to validate the SSL certificate'
+nomad_download_validate_certs: true
+
+nomad_arch:     "{{ (ansible_architecture == 'x86_64') | ternary('amd64', 'i386') }}"
+nomad_package:  "nomad_{{nomad_version}}_linux_{{nomad_arch}}.zip"
+nomad_base_url: "https://releases.hashicorp.com/nomad/{{nomad_version}}"
+nomad_url:      "{{nomad_base_url}}/{{nomad_package}}"
+nomad_package_dest: /usr/local/src
+
+# Start nomad at boot time
+#
+nomad_start_at_boot: True
+
+# Config and data directories
+#
+nomad_config_dir: /etc/nomad.d
+nomad_data_dir: /var/nomad
+
+# Daemon options to be passed through nomad options file
+# (/etc/default/nomad or /etc/sysconfig/nomad)
+#
+#nomad_daemon_options: ""
+
+# nomad config
+# nomad_config is a hash where the item key represents the
+# config file name, and it's value is a json block (without the
+# main curly brackets). This allows for flexible configuration
+# like:
+#
+# nomad_config:
+#
+#
+nomad_config: {}
+
+# vi:ts=2:sw=2:et:ft=yaml

@@ -1,0 +1,8 @@
+---
+
+nomad_daemon_options_dirname: sysconfig
+
+#nomad_packages:
+
+
+# vi:ts=2:sw=2:et:ft=yaml

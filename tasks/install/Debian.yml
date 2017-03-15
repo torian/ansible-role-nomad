@@ -1,0 +1,8 @@
+---
+
+- name: Install Nomad dependencies (Debian)
+  apt:
+    name: "{{item}}"
+  with_items: "{{nomad_packages}}"
+
+# vi:ts=2:sw=2:et:ft=yaml

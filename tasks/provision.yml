@@ -1,0 +1,29 @@
+---
+
+# Directories
+#
+- name: Nomad Binary Directory
+  file:
+    state: directory
+    name: "{{nomad_dest}}"
+    owner: "{{nomad_user}}"
+    group: "{{nomad_group}}"
+    mode: "0755"
+
+- name: Nomad Config Directory
+  file:
+    state: directory
+    name: "{{nomad_config_dir}}"
+    owner: "{{nomad_user}}"
+    group: "{{nomad_group}}"
+    mode: "0750"
+
+- name: Nomad Data Directory
+  file:
+    state: directory
+    name: "{{nomad_data_dir}}"
+    owner: "{{nomad_user}}"
+    group: "{{nomad_group}}"
+    mode: "0750"
+
+# vi:ts=2:sw=2:et:ft=yaml
