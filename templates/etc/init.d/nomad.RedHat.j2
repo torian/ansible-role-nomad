@@ -30,7 +30,7 @@ pidfile="/var/run/$prog.pid"
 lockfile="/var/lock/subsys/$prog"
 logfile="/var/log/$prog"
 confdir="{{nomad_config_dir}}"
-DAEMON_ARGS="agent -config-dir=$confdir "
+DAEMON_ARGS="agent -config $confdir "
 
 # pull in sysconfig settings
 [ -e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog

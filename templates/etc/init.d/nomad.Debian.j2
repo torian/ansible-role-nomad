@@ -17,7 +17,7 @@ PATH=/usr/sbin:/usr/bin:/sbin:/bin
 DESC="Nomad service discovery framework"
 NAME=nomad
 DAEMON={{nomad_bin}}
-DAEMON_ARGS="agent -config-dir={{nomad_config_dir}}"
+DAEMON_ARGS="agent -config {{nomad_config_dir}}"
 USER={{nomad_user}}
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME

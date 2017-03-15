@@ -1,0 +1,17 @@
+---
+
+- name: Nomad Init Script
+  template:
+    src: "etc/init.d/nomad.{{ansible_os_family}}.j2"
+    dest: /etc/init.d/nomad
+    owner: root
+    group: root
+    mode: "0755"
+
+- service:
+    name: nomad
+    enabled: yes
+    state: started
+  when: nomad_start_at_boot
+
+# vi:ts=2:sw=2:et:ft=yaml
