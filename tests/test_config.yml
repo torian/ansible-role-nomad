@@ -1,8 +1,8 @@
 ---
 
 - name: Defaults
-  hosts: all
-  sudo: yes
+  hosts: localhost
+  remote_user: root
 
   vars:
     - nomad_config:
