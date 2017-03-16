@@ -8,6 +8,12 @@ galaxy_info:
     - name: EL
       versions:
         - 7
+        - 6
+    - name: Ubuntu
+      versions:
+        - xenial
+        - trusty
+        - precise
   galaxy_tags:
     - cloud
     - scheduler

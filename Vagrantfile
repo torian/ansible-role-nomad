@@ -26,6 +26,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize [ 'modifyvm', :id, '--natdnsproxy1', 'on' ]
   end
       
+  config.vm.define 'ubuntu-xenial' do |ubuntu_x|
+    ubuntu_x.vm.box      = 'ubuntu/xenial64'
+    #ubuntu_x.vm.hostname = 'ubuntu-xenial'
+    
+    ubuntu_x.vm.provision 'shell', inline: 'apt-get update'
+    ubuntu_x.vm.provision 'shell', inline: 'apt-get install -y -qq  python-pip libffi-dev libssl-dev python-dev'
+    ubuntu_x.vm.provision 'shell', inline: 'pip install ansible==2.2.0.0 ansible-lint jinja2'
+
+    ubuntu_x.vm.provision 'ansible' do |ansible| 
+      ansible.playbook = 'tests/test_vagrant.yml'
+      ansible.extra_vars = {
+      }
+    end
+    
+  end
+
   config.vm.define 'ubuntu-trusty' do |ubuntu_t|
     ubuntu_t.vm.box      = 'ubuntu/trusty64'
     ubuntu_t.vm.hostname = 'ubuntu-trusty'

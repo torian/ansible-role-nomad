@@ -6,7 +6,8 @@ An Ansible Role that installs and configures Hashicorp Nomad on Red Hat/CentOS o
 
 ## Tested On
 
-  * EL / Centos (7)
+  * EL / Centos (7 / 6)
+  * Ubuntu (Xenial / Trusty / Precise)
 
 
 ## Role Variables
