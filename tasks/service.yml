@@ -8,7 +8,8 @@
     group: root
     mode: "0755"
 
-- service:
+- name: Enable Nomad at boot
+  service:
     name: nomad
     enabled: yes
     state: started
