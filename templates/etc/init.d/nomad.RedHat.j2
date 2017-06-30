@@ -2,7 +2,7 @@
 #
 # Nomad        Manage the Nomad agent
 #       
-# chkconfig:   2345 95 95
+# chkconfig:   2345 95 05
 # description: Nomad is a tool for service discovery and configuration
 # processname: nomad
 # config: /etc/nomad.d
@@ -70,7 +70,7 @@ stop() {
     echo -n $"Shutting down $prog: "
     ## graceful shutdown with SIGINT
     #killproc -p $pidfile $exec -INT
-    $exec leave
+    pkill -f $exec
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && rm -f $lockfile
