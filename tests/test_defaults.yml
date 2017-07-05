@@ -6,7 +6,7 @@
 
   roles:
     - {
-        role: ansible-role-nomad, sudo: true
+        role: ansible-role-nomad, become: true
       }
 
   tasks:

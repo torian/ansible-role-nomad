@@ -2,7 +2,7 @@
 
 - name: Defaults
   hosts: all
-  sudo: yes
+  become: yes
 
   vars:
     - nomad_config:
@@ -25,7 +25,7 @@
 
   roles:
     - {
-        role: ansible-role-nomad, sudo: true
+        role: ansible-role-nomad, become: true
       }
 
   tasks:
@@ -48,5 +48,53 @@
       command: >
         pgrep -fl nomad
       register: nomad_assert_running
+
+######### 
+
+- name: Add Nomad to Docker group
+  hosts: all
+  become: yes
+
+  vars:
+    - nomad_config:
+        base: |
+          bind_addr = "0.0.0.0"
+          log_level = "INFO"
+          data_dir  = "{{nomad_data_dir}}"
+          
+          advertise {
+            http = "{{ansible_default_ipv4.address}}"
+            rpc  = "{{ansible_default_ipv4.address}}"
+            serf = "{{ansible_default_ipv4.address}}"
+          }
+
+        server: |
+          server {
+            enabled = true
+            bootstrap_expect = 1
+          }
+    - nomad_user_to_docker: true
+
+  pre_tasks:
+    - name: Add docker group
+      group:
+        name: "{{nomad_docker_group}}"
+        system: true
+
+  roles:
+    - {
+        role: ansible-role-nomad, become: true
+      }
+
+  tasks:
+
+    - name: Flush handlers
+      meta: flush_handlers
+
+    - name: Check if Nomad is running
+      command: >
+        pgrep -fl nomad
+      register: nomad_assert_running
+
 
 # vi:ts=2:sw=2:et:ft=yaml
