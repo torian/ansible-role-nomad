@@ -4,6 +4,14 @@
 nomad_user:  nomad
 nomad_group: nomad
 
+# Add the nomad user to the docker group
+#  If the docker group exists, and `nomad_user_to_docker`
+#  is set to true, then add the nomad_user to the docker
+#  group. THIS WILL NOT CREATE THE docker GROUP !
+#
+nomad_docker_group: docker
+nomad_user_to_docker: false
+
 # Create the nomad user and group
 nomad_create_user: true
 

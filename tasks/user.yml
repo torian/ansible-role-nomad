@@ -15,4 +15,20 @@
     shell: "/bin/nologin"
     system: yes
 
+- name: Docker group
+  block:
+
+  - name: Docker group verification
+    getent:
+      database: group
+      key: "{{nomad_docker_group}}"
+
+  - name: Add Nomad user to Docker group
+    user:
+      name: "{{nomad_user}}"
+      groups: "{{nomad_docker_group}}"
+      append: yes
+
+  when: nomad_user_to_docker
+
 # vi:ts=2:sw=2:et:ft=yaml
