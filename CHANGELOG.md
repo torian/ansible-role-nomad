@@ -1,5 +1,9 @@
 # Changelog 
 
+## 2017-07-05: 0.1.3
+
+  - Ability to add nomad user to the docker group
+
 ## 2017-06-30: 0.1.2
 
   - Fixed init script not killing nomad properly
