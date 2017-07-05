@@ -15,8 +15,7 @@
     shell: "/bin/nologin"
     system: yes
 
-- name: Docker group
-  block:
+- block:
 
   - name: Docker group verification
     getent:
