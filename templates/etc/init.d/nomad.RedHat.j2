@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Nomad        Manage the Nomad agent
-#       
+#
 # chkconfig:   2345 95 05
 # description: Nomad is a tool for service discovery and configuration
 # processname: nomad
@@ -39,7 +39,7 @@ export GOMAXPROCS=${GOMAXPROCS:-2}
 
 start() {
     [ -x $exec ] || exit 5
-    
+
     [ -d $confdir ] || exit 6
 
     umask 077
@@ -48,7 +48,7 @@ start() {
     chown $user:$user $logfile $pidfile
 
     echo -n $"Starting $prog: "
-    
+
     ## holy shell shenanigans, batman!
     ## daemon can't be backgrounded.  we need the pid of the spawned process,
     ## which is actually done via runuser thanks to --user.  you can't do "cmd
@@ -57,12 +57,12 @@ start() {
         --pidfile=$pidfile \
         --user=${user} \
         " { $exec ${DAEMON_ARGS} ${NOMAD_OPTS} &>> $logfile & } ; echo \$! >| $pidfile "
-    
+
     RETVAL=$?
     echo
-    
+
     [ $RETVAL -eq 0 ] && touch $lockfile
-    
+
     return $RETVAL
 }
 
@@ -70,7 +70,7 @@ stop() {
     echo -n $"Shutting down $prog: "
     ## graceful shutdown with SIGINT
     #killproc -p $pidfile $exec -INT
-    pkill -f $exec
+    pkill $prog
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && rm -f $lockfile
