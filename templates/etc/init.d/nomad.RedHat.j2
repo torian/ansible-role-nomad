@@ -26,6 +26,7 @@
 prog="nomad"
 user="{{nomad_user}}"
 exec="{{nomad_bin}}"
+exec_child="{{nomad_dest}}"
 pidfile="/var/run/$prog.pid"
 lockfile="/var/lock/subsys/$prog"
 logfile="/var/log/$prog"
@@ -70,10 +71,10 @@ stop() {
     echo -n $"Shutting down $prog: "
     ## graceful shutdown with SIGINT
     #killproc -p $pidfile $exec -INT
-    pkill $prog
+    pkill -f $exec && pkill -f $exec_child
     RETVAL=$?
     echo
-    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    [ $RETVAL -eq 0 ] && rm -f $lockfile && rm -f $pidfile
     return $RETVAL
 }
 
