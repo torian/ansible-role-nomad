@@ -7,7 +7,7 @@ nomad_group: nomad
 # Create the nomad user and group
 nomad_create_user: true
 
-nomad_version: 0.5.5
+nomad_version: 0.6.0
 
 nomad_bin: /usr/local/bin/nomad
 nomad_dest: "/opt/nomad/{{nomad_version}}"
