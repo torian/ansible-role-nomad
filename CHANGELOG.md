@@ -1,6 +1,6 @@
 # Changelog 
 
-## 2017-07-05: 0.6.0
+## 2017-08-01: 0.6.0
 
   - Nomad version bump
   - Match role version with nomad's mayor & minor 
