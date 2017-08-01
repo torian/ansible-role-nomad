@@ -1,5 +1,10 @@
 # Changelog 
 
+## 2017-07-05: 0.6.0
+
+  - Nomad version bump
+  - Match role version with nomad's mayor & minor 
+
 ## 2017-07-05: 0.1.3
 
   - Ability to add nomad user to the docker group
