@@ -43,6 +43,12 @@ nomad_package_dest: /usr/local/src
 #
 nomad_start_at_boot: True
 
+# The following toggle will start nomad on a plabook execution
+# or prevent it (even handlers).
+# This might turn handy when building images that should have a
+# clean start (nothing in the data dir)
+nomad_started: true
+
 # Config and data directories
 #
 nomad_config_dir: /etc/nomad.d

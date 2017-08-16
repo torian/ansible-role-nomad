@@ -4,6 +4,7 @@
   service:
     name: nomad
     state: started
+  when: nomad_started
 
 - name: nomad stop
   service:
@@ -14,5 +15,6 @@
   service:
     name: nomad
     state: restarted
+  when: nomad_started
 
 # vi:ts=2:sw=2:et:ft=yaml
