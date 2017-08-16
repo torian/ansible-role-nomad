@@ -2,7 +2,8 @@
 
 ## 2017-08-16: 0.6.1
   
-  - Toggle to start nomad when running the playbook and disable (defaults to true)
+  - Toggle to start nomad when running the playbook (defaults to true).
+    Also toggles handlers
   - Init script exit code fixed when no process is killed
 
 ## 2017-08-01: 0.6.0
