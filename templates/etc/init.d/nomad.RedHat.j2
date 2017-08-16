@@ -71,7 +71,7 @@ stop() {
     echo -n $"Shutting down $prog: "
     ## graceful shutdown with SIGINT
     #killproc -p $pidfile $exec -INT
-    pkill -f $exec && pkill -f $exec_child
+    pkill -f $exec && pkill -f $exec_child || true
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && rm -f $lockfile && rm -f $pidfile
