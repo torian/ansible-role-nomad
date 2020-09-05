@@ -7,7 +7,7 @@ An Ansible Role that installs and configures Hashicorp Nomad on Red Hat/CentOS o
 ## Tested On
 
   * EL / Centos (7 / 6)
-  * Ubuntu (Xenial / Trusty / Precise)
+  * Ubuntu (Bionic / Focal)
 
 
 ## Role Variables
@@ -25,7 +25,7 @@ The following example will install and configure nomad version `0.5.0`, and will
     - hosts: nomad_servers
       
       vars:
-        - nomad_version: 0.6.0
+        - nomad_version: 0.12.0
         - nomad_config:
             base: |
               bind_addr = "{{ansible_default_ipv4.address}}"

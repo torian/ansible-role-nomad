@@ -1,6 +1,6 @@
 ---
 
-nomad_daemon_options_dirname: sysconfig
+nomad_environment_file: /etc/sysconfig/nomad
 
 #nomad_packages:
 

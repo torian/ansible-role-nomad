@@ -1,18 +1,19 @@
 ---
 
-- name: Nomad Init Script
+- name: Service file
   template:
-    src: "etc/init.d/nomad.{{ansible_os_family}}.j2"
-    dest: /etc/init.d/nomad
+    src: nomad.service.j2
+    dest: /etc/systemd/system/nomad.service
     owner: root
     group: root
-    mode: "0755"
+    mode: "0644"
+  notify: nomad restart
 
-- name: Enable Nomad at boot
-  service:
+- name: Enable service
+  systemd:
     name: nomad
     enabled: yes
-    state: "{{ (nomad_started) | ternary('started', 'stopped') }}"
+    daemon_reload: yes
   when: nomad_start_at_boot
 
 # vi:ts=2:sw=2:et:ft=yaml

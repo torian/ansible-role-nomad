@@ -1,0 +1,30 @@
+[Unit]
+Description=Hashicorp Nomad
+Documentation=https://nomadproject.io/docs/
+Wants={{ nomad_systemd_unit_wants | default("network-online.target") }}
+After={{ nomad_systemd_unit_after | default("network-online.target") }}
+
+[Service]
+SyslogIdentifier={{ nomad_systemd_syslog_identifier | default("nomad") }}
+User={{ nomad_user }}
+Group={{ nomad_group }}
+
+EnvironmentFile=/{{ nomad_environment_file }}
+ExecStart={{ nomad_bin }} agent -config {{ nomad_config_dir }} ${NOMAD_OPTS}
+PIDFile=/run/nomad.pid
+StartLimitBurst=5
+StartLimitIntervalSec=10
+Restart=on-failure
+RestartSec=2
+
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+KillSignal=SIGINT
+
+LimitNOFILE={{ nomad_systemd_service_limitnofile | default(65536) }}
+LimitNPROC={{ nomad_systemd_service_limitnproc | default("infinity") }}
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target
+

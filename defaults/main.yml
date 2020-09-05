@@ -15,7 +15,7 @@ nomad_user_to_docker: false
 # Create the nomad user and group
 nomad_create_user: true
 
-nomad_version: 0.6.0
+nomad_version: 0.12.0
 
 nomad_bin: /usr/local/bin/nomad
 nomad_dest: "/opt/nomad/{{nomad_version}}"

@@ -1,6 +1,6 @@
 ---
 
-nomad_daemon_options_dirname: default
+nomad_environment_file: /etc/default/nomad
 
 #nomad_packages:
 

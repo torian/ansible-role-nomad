@@ -1,20 +1,25 @@
+# vi:ts=2:sw=2:et:ft=yaml
 ---
 
+- name: nomad service
+  systemd:
+    name: nomad
+    daemon_reload: yes
+
 - name: nomad start
-  service:
+  systemd:
     name: nomad
     state: started
   when: nomad_started
 
-- name: nomad stop
-  service:
-    name: nomad
-    state: stopped
-
 - name: nomad restart
-  service:
+  systemd:
     name: nomad
     state: restarted
   when: nomad_started
 
-# vi:ts=2:sw=2:et:ft=yaml
+- name: nomad stop
+  systemd:
+    name: nomad
+    state: stopped
+

@@ -3,8 +3,7 @@
 - name: Install Nomad Dependencies (RedHat)
   yum:
     state: present
-    name: "{{item}}"
+    name: "{{ nomad_packages }}"
     update_cache: yes
-  with_items: "{{nomad_packages}}"
 
 # vi:ts=2:sw=2:et:ft=yaml
